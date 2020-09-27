@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+
+<!-- bind yek tarafeh yani az data bardard va dar html bogzarad ke ba v-bind va v-for
+     baray in ke bind do tarafeh bashad yani vaghti dar tag chizi minevisim meghdar
+     an dron yek motaghayer daron data gharar begirad bayad v-model ham estefadeh konim
+
+ -->
+
+    <div id="app">
+        <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+        <ul>
+
+            <li v-for="(todo,index) in todos" v-on:click.prevent="removeTodo(index)"><a href="#">{{todo}}</a></li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+       let app=new Vue({
+           el:'#app',
+           data:{
+               newTodo:'',
+               todos:[
+                   "job1",
+                   "job2",
+                   "job3",
+               ]
+           },
+           methods:{
+                addTodo(){
+                    this.todos.push(this.newTodo);
+                    this.newTodo='';
+                },
+               removeTodo(index){
+                    this.todos.splice(index,1)
+               }
+           }
+
+        })
+    </script>
+
+</body>
+</html>
