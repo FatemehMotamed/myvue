@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
         <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
         <ul>
 
-            <li v-for="(todo,index) in todos" v-on:click.prevent="removeTodo(index)"><a href="#">{{todo}}</a></li>
+            <li v-for="(todo,index) in todos" v-on:click.prevent="removeTodo(index)"><a href="#" class="{ complete : todo.complete}">{{ todo.title }}</a></li>
         </ul>
     </div>
 
@@ -27,10 +28,9 @@
            data:{
                newTodo:'',
                todos:[
-                   "job1",
-                   "job2",
-                   "job3",
-                   "job4",
+                   { title: "job1", complete: true },
+                   { title: "job2", complete: false },
+                   { title: "job3", complete: true },
                ]
            },
            methods:{
