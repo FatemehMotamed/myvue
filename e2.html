@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- bind yek tarafeh yani az data bardard va dar html bogzarad ke ba v-bind va v-for
+     baray in ke bind do tarafeh bashad yani vaghti dar tag chizi minevisim meghdar
+     an dron yek motaghayer daron data gharar begirad bayad v-model ham estefadeh konim
+
+ -->
+
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <input type="text" v-model="newTodo.title" v-on:keyup.enter="addTodo">
+                <h1>todos</h1>
+                 <ul class="list-group">
+                    <li class="list-group-item" v-for="(todo,index) in todos" ><a href="#" :class="{ complete : todo.complete}" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>
+                 </ul>
+
+                <br>
+
+                <h1>done</h1>
+                 <ul class="list-group">
+                    <li class="list-group-item" v-for="(todo,index) in completeTodo" ><a href="#"  v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>
+                 </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+       let app=new Vue({
+           el:'#app',
+           data:{
+               newTodo:{
+                  title: "", complete: false
+               },
+               todos:[
+                   { title: "job1", complete: true },
+                   { title: "job2", complete: false },
+                   { title: "job3", complete: true },
+               ]
+           },
+           methods:{
+                addTodo(){
+                    if (this.newTodo.title != ""){
+                        this.todos.push(this.newTodo);
+                        this.newTodo={title: "", complete: false};
+
+                    }
+
+                },
+               removeTodo(index){
+                    // this.todos.splice(index,1)   remove todos
+                   this.todos[index].complete = !this.todos[index].complete
+
+               }
+           },
+
+           computed:{
+                completeTodo(){
+                    return this.todos.filter(todo => todo.complete)
+                }
+           }
+
+        })
+    </script>
+
+</body>
+</html>
